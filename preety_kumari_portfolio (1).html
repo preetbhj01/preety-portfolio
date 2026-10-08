@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preety Kumari — 3D Digital Artist Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-color: #0f0f0f;
+      --text-main: #f1f1f1;
+      --text-muted: #aaaaaa;
+      --accent: #ff5722;
+      --accent-hover: #e64a19;
+      --card-bg: #1a1a1a;
+      --border-color: #333333;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(15, 15, 15, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2rem;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 0.05em;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 6rem; /* Account for fixed nav */
+      padding-bottom: 4rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-content {
+      max-width: 540px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      background: rgba(255, 87, 34, 0.1);
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    h1 span {
+      color: #666;
+    }
+
+    .hero-desc {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .cta-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.8rem 1.8rem;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .cta-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .cta-secondary {
+      color: var(--text-main);
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .cta-secondary::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    .cta-secondary:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .hero-visual {
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      border: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .hero-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .hero-visual:hover img {
+      transform: scale(1.03);
+    }
+
+    .work-section {
+      padding: 6rem 0;
+    }
+
+    .section-header {
+      margin-bottom: 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .work-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+    }
+
+    .work-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .work-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15,15,15,0.9) 0%, rgba(15,15,15,0.2) 50%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .work-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .work-item:hover .work-overlay {
+      opacity: 1;
+    }
+
+    .work-category {
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      transform: translateY(10px);
+      transition: transform 0.3s ease;
+    }
+
+    .work-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      transform: translateY(10px);
+      transition: transform 0.3s ease 0.05s;
+    }
+
+    .work-item:hover .work-category,
+    .work-item:hover .work-title {
+      transform: translateY(0);
+    }
+
+    footer {
+      padding: 8rem 0 4rem;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+      background: linear-gradient(to bottom, transparent, rgba(255, 87, 34, 0.03));
+    }
+
+    .footer-content h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 1rem;
+    }
+
+    .footer-content p {
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+      font-size: 1.1rem;
+    }
+
+    .email-link {
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      font-weight: 800;
+      color: var(--text-main);
+      position: relative;
+      display: inline-block;
+      margin-bottom: 4rem;
+    }
+
+    .email-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--accent);
+      transition: height 0.2s ease;
+      z-index: -1;
+    }
+
+    .email-link:hover::after {
+      height: 40%;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      align-items: center;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .social-links a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+      }
+      
+      .hero-content {
+        margin: 0 auto;
+      }
+
+      .cta-group {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        aspect-ratio: 16/9;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; /* Can be replaced with a hamburger menu in a real app */
+      }
+      
+      .work-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+      
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <nav>
+    <div class="nav-container">
+      <a href="#top" class="logo">PREETY<span>.</span></a>
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#case-studies">Case Studies</a>
+        <a href="#about">About</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <header>
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="badge">3D Digital Artist · Stylized · NPR</div>
+          <h1>Ideas into<br><span>worlds.</span></h1>
+          <p class="hero-desc">Preety Kumari is a 3D digital artist focused on stylized visual development, environment and character creation, material exploration, non-photorealistic rendering and visual storytelling.</p>
+          <div class="cta-group">
+            <a href="#contact" class="cta-primary">Get in touch</a>
+            <a href="#work" class="cta-secondary">Explore selected work ↓</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop" alt="Abstract 3D Artwork">
+        </div>
+      </div>
+    </header>
+
+    <section id="work" class="work-section container">
+      <div class="section-header">
+        <h2 class="section-title">Selected Work</h2>
+      </div>
+      
+      <div class="work-grid">
+        <!-- Artwork 1 -->
+        <div class="work-item">
+          <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=800&auto=format&fit=crop" alt="Neon Cyberpunk Environment">
+          <div class="work-overlay">
+            <span class="work-category">Environment Design</span>
+            <h3 class="work-title">Neon Nexus</h3>
+          </div>
+        </div>
+        
+        <!-- Artwork 2 -->
+        <div class="work-item">
+          <img src="https://images.unsplash.com/photo-1618005192384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="Abstract Geometric Composition">
+          <div class="work-overlay">
+            <span class="work-category">Abstract 3D</span>
+            <h3 class="work-title">Flow State</h3>
+          </div>
+        </div>
+
+        <!-- Artwork 3 -->
+        <div class="work-item">
+          <img src="https://images.unsplash.com/photo-1633519894862-2a07c3be1218?q=80&w=800&auto=format&fit=crop" alt="Stylized Character Render">
+          <div class="work-overlay">
+            <span class="work-category">Material Study</span>
+            <h3 class="work-title">Iridescent</h3>
+          </div>
+        </div>
+
+        <!-- Artwork 4 -->
+        <div class="work-item">
+          <img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=800&auto=format&fit=crop" alt="Sci-Fi Interior">
+          <div class="work-overlay">
+            <span class="work-category">Lighting & NPR</span>
+            <h3 class="work-title">Void Chamber</h3>
+          </div>
+        </div>
+
+        <!-- Artwork 5 -->
+        <div class="work-item">
+          <img src="https://images.unsplash.com/photo-1618172193622-ae2d024f6620?q=80&w=800&auto=format&fit=crop" alt="Organic 3D Shapes">
+          <div class="work-overlay">
+            <span class="work-category">Visual Development</span>
+            <h3 class="work-title">Organic Dreams</h3>
+          </div>
+        </div>
+
+        <!-- Artwork 6 -->
+        <div class="work-item">
+          <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=800&auto=format&fit=crop" alt="Fantasy Landscape">
+          <div class="work-overlay">
+            <span class="work-category">World Building</span>
+            <h3 class="work-title">Ethereal Realm</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <h2>Let's build a world together.</h2>
+        <p>Currently available for freelance opportunities and collaborations.</p>
+        <a href="mailto:preetykumari.art@gmail.com" class="email-link">preetykumari.art@gmail.com</a>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 Preety Kumari. All rights reserved.</p>
+        <div class="social-links">
+          <a href="#">ArtStation</a>
+          <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Twitter</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
